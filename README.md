@@ -2,7 +2,7 @@
 
 - Simple Kotlin Multiplatform Mobile App for displaying News.
 
-![](https://github.com/mohamedXashraf/news-feed-kmm/blob/master/banner.png?raw=true)
+![](https://github.com/mohamedXashraf/news-feed-kmm/blob/master/banner.jpg?raw=true)
 
 - Topics:
   * Kotlin Multiplatform Mobile.
