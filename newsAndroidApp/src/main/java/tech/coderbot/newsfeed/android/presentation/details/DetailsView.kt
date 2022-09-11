@@ -5,10 +5,9 @@ import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -16,6 +15,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -51,24 +51,26 @@ private fun DetailsView(news: News? = null, backAction: () -> Unit = {}, urlActi
 {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        backgroundColor = Color.LightGray,
+        backgroundColor = Color.White,
         topBar = { TopBar(backAction) }
     ) {
-        LazyColumn(modifier = Modifier.padding(5.dp)) {
+        LazyColumn {
             item {
-                Column(modifier = Modifier
-                    .padding(14.dp)
-                    .fillMaxWidth()
-                    .background(Color.White)) {
-                    Box(contentAlignment = Alignment.BottomEnd) {
-                        if (!news?.urlToImage.isNullOrEmpty()) RemoteImageView(news?.urlToImage!!)
-                        TextView(text = DateFormatter.format(news?.publishedAt ?: ""), color = Color.White, horizontalPadding = 16, verticalPadding = 16, size = 13, align = TextAlign.End)
+                Box(contentAlignment = Alignment.BottomEnd) {
+                    if (!news?.urlToImage.isNullOrEmpty()) {
+                        Card(shape = RoundedCornerShape(10.dp), modifier = Modifier.padding(10.dp)) {
+                            RemoteImageView(news?.urlToImage!!)
+                        }
                     }
-                    TextView(text = news?.title ?: "", horizontalPadding = 16, verticalPadding = 5, color = Color.DarkGray, weight = FontWeight.SemiBold)
-                    TextView(text = stringResource(id = R.string.author, news?.author ?: ""), horizontalPadding = 16, weight = FontWeight.Normal, size = 13)
-                    Spacer(modifier = Modifier.height(20.dp))
-                    TextView(text = news?.description ?: "", horizontalPadding = 16, verticalPadding = 10, size = 14, weight = FontWeight.Normal)
+                    TextView(text = DateFormatter.format(news?.publishedAt ?: ""), color = Color.White, horizontalPadding = 16, verticalPadding = 16, size = 13, align = TextAlign.End)
                 }
+            }
+            item {
+                TextView(text = news?.title ?: "", horizontalPadding = 16, verticalPadding = 5, color = Color.DarkGray, weight = FontWeight.SemiBold)
+                TextView(text = stringResource(id = R.string.author, news?.author ?: ""), horizontalPadding = 16, weight = FontWeight.Normal, size = 13)
+                Spacer(modifier = Modifier.height(20.dp))
+                TextView(text = news?.description ?: "", horizontalPadding = 16, verticalPadding = 10, size = 14, color = Color.DarkGray, weight = FontWeight.Normal)
+                Spacer(modifier = Modifier.height(20.dp))
             }
             item {
                 ButtonView(label = stringResource(id = R.string.open_website), urlAction)
