@@ -7,7 +7,7 @@
 - Topics:
   * Kotlin Multiplatform Mobile.
 
-  * Clean Architecture: 3 Modules : (Presentation, Domain, Data)Layers.
+  * Clean Architecture: 3 Modules : (Presentation, Domain, Data) Layers.
 
   * Kotlin Coroutines.
 
